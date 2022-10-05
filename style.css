@@ -1,0 +1,30 @@
+.lockscreen {
+    background-image: url('./lockscreen.jpg');
+    background-size: cover;
+    position: relative;
+    transition-property: bottom;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+    height: 100vh;
+    bottom: 0vh;
+}
+
+.unlocked {
+    bottom: 100vh;
+}
+
+.lockscreen-title-text {
+    background-color: white;
+    color: blue;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.lockscreen-unlock-btn {
+    width: 20%;
+    margin: 0 auto;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
