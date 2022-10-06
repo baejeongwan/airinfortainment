@@ -70,7 +70,7 @@ function video() {
             document.getElementById('videoListGroup').innerHTML = ""
             videoList.forEach((element, index) => {
                 document.getElementById('videoListGroup').innerHTML += `
-                <a onclick="playVideo(${index})" class="list-group-item list-group-item-action">${element.file}</a>`
+                <a onclick="playVideo(${index})" class="list-group-item list-group-item-action">${element.name}</a>`
             })
         })
 }
@@ -97,8 +97,26 @@ function flightInfo() {
 //#region 미디어
 function playVideo(number) {
     videoPlayModal.show()
-    document.getElementById('videoPlayModalLabel').innerText = videoList[number].file
-    document.getElementById('videoPlayModalvideo').src = "./video/" + videoList[number].file
+    if (videoList[number].type == "file") {
+        document.getElementById("video-play-modal-body").innerHTML = `
+        <video controls class="w-100 h-100">
+            <source id="videoPlayModalvideo" src="${"./video/" + videoList[number].link}" />
+        </video>`
+        document.getElementById('videoPlayModalLabel').innerHTML = videoList[number].name
+    } else if (videoList[number].type == "internet") {
+        document.getElementById("video-play-modal-body").innerHTML = `
+        <video controls class="w-100 h-100">
+            <source id="videoPlayModalvideo" src="${videoList[number].link}" />
+        </video>`
+        document.getElementById('videoPlayModalLabel').innerHTML = videoList[number].name
+
+    } else if (videoList[number].type == "iframe") {
+        document.getElementById('video-play-modal-body').innerHTML = videoList[number].code
+        document.getElementById('videoPlayModalLabel').innerHTML = videoList[number].name
+    } else {
+        document.getElementById('video-play-modal-body').innerHTML = "<h1>OOPS! Undecodable video!</h1>"
+        document.getElementById('videoPlayModalLabel').innerHTML = "ERROR!"
+    }
 }
 
 function showImage(number) {

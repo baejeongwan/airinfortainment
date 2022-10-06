@@ -18,7 +18,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        고리스 기내 엔터테인먼트 시스템 v1.0
+                        고리스 기내 엔터테인먼트 시스템 v2.0
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -83,8 +83,15 @@
                         <h1 class="modal-title fs-5" id="videoPlayModalLabel">비디오 재생</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <video width="100%" height="100%" id="videoPlayModalvideo" controls></video>
+                    <div class="modal-body" id="video-play-modal-body">
+                        <video id="my-video" controls preload="auto" data-setup="{}" class="video-js w-100 h-100">
+                            <source id="videoPlayModalvideo" src="" />
+                            <p class="vjs-no-js">
+                                비디오 시청을 위해 자바스크립트를 활성화해 주시고 HTML5 지원 브라우저로 교체를 고려해주세요.
+                                <a href="https://videojs.com/html5-video-support/" target="_blank">HTML5 지원 브라우저</a>
+                            </p>    
+                        </video>
+                        <!--<video width="100%" height="100%" id="videoPlayModalvideo" controls></video>-->
                     </div>
                 </div>
             </div>
