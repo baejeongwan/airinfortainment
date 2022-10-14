@@ -4,6 +4,8 @@
     "description": "Goreece 항공 기내 엔터테인먼트 시스템 2.0",
     "start_url": "/",
     "display": "fullscreen",
+    "background_color": "#FFFFFF",
+    "theme_color": "#87ceeb",
     "icons": [
         {
           "src": "windows11/SmallTile.scale-100.png",
@@ -331,7 +333,8 @@
         },
         {
           "src": "android/android-launchericon-192-192.png",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "purpose": "any maskable"
         },
         {
           "src": "android/android-launchericon-144-144.png",
