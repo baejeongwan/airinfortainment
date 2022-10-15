@@ -2,7 +2,7 @@
     "name": "Goreece 항공 기내 엔터테인먼트",
     "short_name": "기내 엔터테인먼트",
     "description": "Goreece 항공 기내 엔터테인먼트 시스템 2.0",
-    "start_url": "/goreece",
+    "start_url": "/goreece/",
     "display": "fullscreen",
     "background_color": "#FFFFFF",
     "theme_color": "#87ceeb",
