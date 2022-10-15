@@ -1,7 +1,23 @@
 {
     "name": "Goreece 항공 기내 엔터테인먼트",
     "short_name": "기내 엔터테인먼트",
-    "description": "Goreece 항공 기내 엔터테인먼트 시스템 2.0",
+    "description": "Goreece 항공 기내 엔터테인먼트 시스템 2.0입니다. 설치하여 더욱 몰입감을 느낄수 있고 데이터도 절약할수 있습니다.",
+    "screenshots": [
+      {
+        "src": "screenshot/screenshot1.png",
+        "sizes": "1862x928",
+        "type": "image/png",
+        "platform": "wide",
+        "label": "Lockscreen"
+      },
+      {
+        "src": "screenshot/screenshot2.png",
+        "sizes": "1862x936",
+        "type": "image/png",
+        "platform": "wide",
+        "label": "Main screen"
+      }
+    ],
     "start_url": "/goreece/",
     "display": "fullscreen",
     "background_color": "#FFFFFF",
