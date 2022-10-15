@@ -128,7 +128,7 @@ function showImage(number) {
 //#endregion
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => {
+    navigator.serviceWorker.register('https://baejeongwan.github.io/goreece/sw.js').then(() => {
         console.log("Service worker OK")
     })
 }
