@@ -1,6 +1,6 @@
 const cache_name = "mainCache";
 const files_to_cache = [
-    '/'
+    '/goreece'
 ]
 
 self.addEventListener('install', e => {
