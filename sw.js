@@ -1,6 +1,7 @@
 const cache_name = "mainCache";
 const files_to_cache = [
-    '/goreece'
+    '/goreece',
+    '/goreece/video/greece.mp4'
 ]
 
 self.addEventListener('install', e => {
