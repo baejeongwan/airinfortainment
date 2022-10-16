@@ -14,6 +14,20 @@
         <link rel="icon" href="https://baejeongwan.github.io/goreece/favicon.ico">
     </head>
     <body>
+        <!--토스트-->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="airmanaging" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                    <img src="./android/android-launchericon-48-48.png" class="rounded me-2" alt="...">
+                    <strong class="me-auto">기내 행동 안내</strong>
+                    <small>지금</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    항공기가 안정되어 안전벨트를 해제해셔도 됩니다.
+                </div>
+            </div>
+        </div>          
         <!--모달-->
         <!-- Modal -->
         <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
@@ -114,8 +128,25 @@
                     <div class="modal-body">
                         <h1>출발지: ICN (인천 국제 공항) &rarr; 도착지: ATH (아테네 국제 공항)</h1>
                         <div class="d-flex justify-content-between">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6249358.147671204!2d19.990941133923258!3d38.06028698898452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135b4ac711716c63%3A0x363a1775dc9a2d1d!2z6re466as7Iqk!5e1!3m2!1sko!2skr!4v1665878071490!5m2!1sko!2skr" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            <div>
+                            <div class="fullfill">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="normalmap" data-bs-toggle="tab" data-bs-target="#normalmap-pane" type="button" role="tab" aria-controls="normalmap-pane" aria-selected="true">일반지도</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="satellitemap" data-bs-toggle="tab" data-bs-target="#satellitemap-pane" type="button" role="tab" aria-controls="satellitemap-pane" aria-selected="false">위성지도</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade active show" id="normalmap-pane" role="tabpanel" aria-labelledby="normalmap" tabindex="0">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6433655.572937646!2d19.990941133923258!3d38.06028698898453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135b4ac711716c63%3A0x363a1775dc9a2d1d!2z6re466as7Iqk!5e0!3m2!1sko!2skr!4v1665895701441!5m2!1sko!2skr" style="border:0; width: 100%;" height="640" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+                                    <div class="tab-pane fade" id="satellitemap-pane" role="tabpanel" aria-labelledby="satellitemap" tabindex="0">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6249358.147671204!2d19.990941133923258!3d38.06028698898453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135b4ac711716c63%3A0x363a1775dc9a2d1d!2z6re466as7Iqk!5e1!3m2!1sko!2skr!4v1665896145993!5m2!1sko!2skr" height="640" style="border:0; width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 40%;">
                                 <h1>Goreece 항공 비행 정보</h1>
                                 <hr>
                                 <h2>도착까지 약 7시간 남음</h2>

@@ -5,6 +5,7 @@ let videoPlayModal = new bootstrap.Modal(document.getElementById('videoPlayModal
 let flightInfoModal = new bootstrap.Modal(document.getElementById('flightInfoModal'))
 let imageModal = new bootstrap.Modal(document.getElementById('imageModal'))
 let imageShowModal = new bootstrap.Modal(document.getElementById('imageShowModal'))
+let infoToast = new bootstrap.Toast(document.getElementById('airmanaging'))
 let videoList = []
 let imageList = []
 
@@ -16,6 +17,10 @@ function unlockUI() {
         document.getElementById('lockscreen').classList.add('d-none')
         document.getElementById('container').classList.remove('d-none')
     }, 500)
+    infoToast.show()
+    setTimeout(() => {
+        infoToast.hide()
+    }, 2000);
 }
 
 function lockUI() {
