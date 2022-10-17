@@ -201,6 +201,79 @@
                 </div>
             </div>
         </div>
+        
+        <!--Configure timer modal-->
+  
+        <!-- Modal -->
+        <div class="modal fade" id="timerConfModal" tabindex="-1" aria-labelledby="timerConfModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="timerConfModalLabel">타이머</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="needs-validation" novalidate onsubmit="return false" id="timerConfForm">
+                        <div class="modal-body">
+                            <h1>타이머 설정</h1>
+                            <label for="timerName">타이머 이름</label>
+                            <input type="text" id="timerName" placeholder="타이머 이름 입력..." class="form-control" required>
+                            <div class="invalid-feedback">
+                                타이머 이름을 입력하세요
+                            </div>
+                            <label for="timerTime">타이머 시간</label>
+                            <div class="d-flex" id="timerTime">
+                                <input type="number" id="timerMinute" placeholder="분" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    타이머 분을 입력하세요.
+                                </div>
+                                <p>:</p>
+                                <input type="number" id="timerSecond" placeholder="초" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    타이머 초를 입력하세요
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">뒤로 가기</button>
+                            <button type="submit" class="btn btn-primary" onclick="runTimer()">타이머 시작하기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Timer View-->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="timerViewModal" tabindex="-1" aria-labelledby="timerViewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="timerViewModalLabel"> 타이머</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="text-center">타이머</h2>
+                        <h1 class="text-center" id="timerViewTimerName">타이머 명</h1>
+                        <p style="font-size: 100pt;" class="text-center" id="timerLeftView">5:13</p>
+                        <!--While running group-->
+                        <div class="btn-group timerControlBtnGroup" role="group" aria-label="timer btn" id="whileTimerRunningBtn">
+                            <button class="btn btn-secondary timerControlBtn" onclick="timerPause()">일시정지</button>
+                            <button class="btn btn-danger timerControlBtn" onclick="timerReset()">초기화</button>
+                        </div>
+                        <!--While timer paused-->
+                        <div class="btn-group timerControlBtnGroup d-none" role="group" aria-label="timer btn" id="whileTimerPausedBtn">
+                            <button class="btn btn-success timerControlBtn" onclick="timerResume()">계속</button>
+                            <button class="btn btn-danger timerControlBtn" onclick="timerReset()">초기화</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="quitTimer()">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
   
         <!--잠금화면-->
         <div class="lockscreen" id="lockscreen">
@@ -251,6 +324,15 @@
                         </button>
                     </div>
                     <div class="col-4">
+                        <button class="btn btn-primary btn-lg" onclick="timer()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                            </svg><br>
+                            타이머
+                        </button>
+                    </div>
+                    <div class="col-4">
                         <button class="btn btn-primary btn-lg" onclick="land()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
@@ -262,6 +344,8 @@
             </div>
         </div>
         <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8' crossorigin='anonymous'></script>
+        <script src="./timer-validation.js"></script>
         <script src="./script.js"></script>
+        <audio src="./audio/Alarm01.wav" class="d-none" id="timerEndAudio"></audio>
     </body>
 </html>

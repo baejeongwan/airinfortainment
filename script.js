@@ -5,9 +5,16 @@ let videoPlayModal = new bootstrap.Modal(document.getElementById('videoPlayModal
 let flightInfoModal = new bootstrap.Modal(document.getElementById('flightInfoModal'))
 let imageModal = new bootstrap.Modal(document.getElementById('imageModal'))
 let imageShowModal = new bootstrap.Modal(document.getElementById('imageShowModal'))
+let timerConfModal = new bootstrap.Modal(document.getElementById('timerConfModal'))
+let timerViewModal = new bootstrap.Modal(document.getElementById('timerViewModal'))
 let infoToast = new bootstrap.Toast(document.getElementById('airmanaging'))
+let timerInterval;
+let timesOver;
 let videoList = []
 let imageList = []
+
+let timerTotalLength;
+let timerLeftLength;
 
 
 //#region 잠금화면 제어
@@ -97,6 +104,13 @@ function image() {
 function flightInfo() {
     flightInfoModal.show()
 }
+
+function timer() {
+    timerConfModal.show()
+    document.getElementById('timerName').value = "그리기 타이머"
+    document.getElementById('timerMinute').value = 6;
+    document.getElementById('timerSecond').value = 0;
+}
 //#endregion
 
 //#region 미디어
@@ -137,3 +151,126 @@ if ('serviceWorker' in navigator) {
         console.log("Service worker OK")
     })
 }
+
+
+//#region 타이머
+function runTimer() {
+    if (document.getElementById('timerConfForm').checkValidity()) {
+        timerConfModal.hide()
+        //Show timer
+        timesOver = false;
+        document.getElementById('timerViewTimerName').innerText = document.getElementById('timerName').value
+        let minute = parseInt(document.getElementById('timerMinute').value)
+        let second = parseInt(document.getElementById('timerSecond').value)
+        timerTotalLength = minute * 60 + second
+        timerLeftLength = timerTotalLength
+        let minuteLeftCalc = Math.floor(timerLeftLength / 60)
+        let secondLeftCalc = timerLeftLength % 60
+        if (minuteLeftCalc < 10) {
+            minuteLeftCalc = "0" + minuteLeftCalc.toString()
+        }
+    
+        if (secondLeftCalc < 10) {
+            secondLeftCalc = "0" + secondLeftCalc.toString()
+        }
+    
+        let finalTimerString = minuteLeftCalc + ":" + secondLeftCalc
+        document.getElementById('timerLeftView').innerText = finalTimerString
+        timerViewModal.show()
+        timerInterval = setInterval(timerUpdate, 1000)
+        document.getElementById('timerConfForm').reset()
+    }
+}   
+
+
+function timerUpdate() {
+    if (timerLeftLength == 0) {
+        //RING!
+        clearInterval(timerInterval)
+        timesOver = true
+        document.getElementById('timerEndAudio').play()
+        document.getElementById('timerLeftView').innerHTML = "시간이<br>끝났습니다"
+        document.getElementById('timerLeftView').style.color = "#FF0000"
+        return
+    }
+    timerLeftLength = timerLeftLength - 1;
+    let minuteLeftCalc = Math.floor(timerLeftLength / 60)
+    let secondLeftCalc = timerLeftLength % 60
+    if (minuteLeftCalc < 10) {
+        minuteLeftCalc = "0" + minuteLeftCalc.toString()
+    }
+
+    if (secondLeftCalc < 10) {
+        secondLeftCalc = "0" + secondLeftCalc.toString()
+    }
+
+    let finalTimerString = minuteLeftCalc + ":" + secondLeftCalc
+    document.getElementById('timerLeftView').innerText = finalTimerString
+}
+
+function timerPause() {
+    if (timesOver) {
+        return
+    }
+    clearInterval(timerInterval)
+    document.getElementById('whileTimerRunningBtn').classList.add('d-none')
+    document.getElementById('whileTimerPausedBtn').classList.remove('d-none')
+}
+
+function timerResume() {
+    if (timesOver) {
+        return
+    }
+    timerInterval = setInterval(timerUpdate, 1000)
+    document.getElementById('whileTimerRunningBtn').classList.remove('d-none')
+    document.getElementById('whileTimerPausedBtn').classList.add('d-none')
+}
+
+function timerReset() {
+    clearInterval(timerInterval)
+    //Stop ring
+    if (timesOver) {
+        document.getElementById('timerEndAudio').pause()
+        document.getElementById('timerLeftView').style.color = "#000000"
+    }
+    //reset time
+    timerLeftLength = timerTotalLength
+    let minuteLeftCalc = Math.floor(timerLeftLength / 60)
+    let secondLeftCalc = timerLeftLength % 60
+    if (minuteLeftCalc < 10) {
+        minuteLeftCalc = "0" + minuteLeftCalc.toString()
+    }
+
+    if (secondLeftCalc < 10) {
+        secondLeftCalc = "0" + secondLeftCalc.toString()
+    }
+
+    let finalTimerString = minuteLeftCalc + ":" + secondLeftCalc
+    document.getElementById('timerLeftView').innerText = finalTimerString
+    //reset button
+    if (document.getElementById('whileTimerRunningBtn').classList.contains('d-none')) {
+        document.getElementById('whileTimerRunningBtn').classList.remove('d-none')
+    }
+    if (!document.getElementById('whileTimerPausedBtn').classList.contains('d-none')) {
+        document.getElementById('whileTimerPausedBtn').classList.add('d-none')
+    }
+    timerInterval = setInterval(timerUpdate, 1000)
+}
+
+function quitTimer() {
+    clearInterval(timerInterval)
+    //Stop ring
+    if (timesOver) {
+        document.getElementById('timerEndAudio').pause()
+        document.getElementById('timerLeftView').style.color = "#000000"
+    }
+    //reset button
+    if (document.getElementById('whileTimerRunningBtn').classList.contains('d-none')) {
+        document.getElementById('whileTimerRunningBtn').classList.remove('d-none')
+    }
+    if (!document.getElementById('whileTimerPausedBtn').classList.contains('d-none')) {
+        document.getElementById('whileTimerPausedBtn').classList.add('d-none')
+    }
+}
+
+//#endregion
